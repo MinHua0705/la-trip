@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🇺🇸 美國高級精品奢華小團</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF8F3;
+    --paper:#FFFFFF;
+    --red:#C8403A;
+    --red-soft:#FBE4E1;
+    --red-deep:#9E2C27;
+    --blue:#2F4F8F;
+    --blue-soft:#E0E8F7;
+    --blue-deep:#1F3566;
+    --ink:#2C3345;
+    --ink-soft:#7B8294;
+    --shadow:0 10px 28px -12px rgba(31,53,102,0.30);
+    --r-lg:28px; --r-md:20px; --r-sm:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Noto Sans TC','Zen Maru Gothic',sans-serif;
+    background:
+      radial-gradient(circle at 10% 6%, rgba(200,64,58,0.10) 0, transparent 38%),
+      radial-gradient(circle at 92% 14%, rgba(47,79,143,0.12) 0, transparent 36%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    display:flex; justify-content:center;
+  }
+  body::before{
+    content:""; position:fixed; inset:0;
+    background-image:radial-gradient(rgba(47,79,143,0.12) 1.4px, transparent 1.4px);
+    background-size:22px 22px; pointer-events:none; z-index:0;
+  }
+  .app{ position:relative; width:100%; max-width:460px; min-height:100vh; z-index:1; padding-bottom:110px; }
+  @media (min-width:520px){
+    body{ padding:28px 0; align-items:flex-start; }
+    .app{ min-height:auto; border-radius:40px; box-shadow:var(--shadow); overflow:hidden; border:1px solid rgba(47,79,143,0.18); }
+  }
+
+  header.top{
+    position:relative; padding:26px 22px 34px; color:#fff;
+    background:linear-gradient(160deg, var(--blue) 0%, var(--blue-deep) 100%);
+    border-radius:0 0 34px 34px; overflow:hidden;
+  }
+  header.top::before{
+    content:""; position:absolute; right:-40px; top:-40px; width:170px; height:170px; border-radius:50%;
+    background:repeating-linear-gradient(135deg, rgba(200,64,58,0.55) 0 12px, rgba(255,255,255,0.18) 12px 24px);
+  }
+  .stripe{ position:absolute; left:0; right:0; bottom:0; height:9px;
+    background:linear-gradient(90deg,var(--red) 0 33%, #fff 33% 66%, var(--red) 66% 100%); }
+  .top-eyebrow{ font-size:12px; letter-spacing:2px; opacity:.85; font-weight:500; position:relative; }
+  .top-title{ font-family:'Zen Maru Gothic',sans-serif; font-weight:900; font-size:24px; margin:6px 0 4px; position:relative; line-height:1.3; }
+  .top-sub{ font-size:13.5px; opacity:.92; position:relative; }
+  .top-badges{ margin-top:16px; display:flex; gap:8px; flex-wrap:wrap; position:relative; }
+  .top-badge{ background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:6px 12px; border-radius:999px; font-size:12px; font-weight:500; }
+
+  main{ padding:20px 18px 4px; }
+  .tab-content{ display:none; animation:fadeUp .35s ease; }
+  .tab-content.active{ display:block; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  .section-title{ font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:15px; color:var(--blue-deep);
+    margin:4px 2px 12px; display:flex; align-items:center; gap:6px; }
+  .sub-title{ font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:14px; color:var(--blue-deep); margin:22px 2px 10px; }
+
+  /* 日卡 */
+  .day-card{ border-radius:var(--r-lg); margin-bottom:14px; box-shadow:var(--shadow); overflow:hidden; border:1px solid rgba(47,79,143,0.12); }
+  .day-card.tone-a{ background:var(--paper); }
+  .day-card.tone-b{ background:var(--red-soft); }
+  .day-card.tone-c{ background:var(--blue-soft); }
+  .day-head{ display:flex; align-items:center; gap:14px; padding:16px; cursor:pointer; user-select:none; }
+  .stamp{ flex:none; width:52px; height:52px; border-radius:50%; border:2px dashed var(--red); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; color:var(--red); font-family:'Zen Maru Gothic',sans-serif; font-weight:900; line-height:1;
+    transform:rotate(-6deg); background:rgba(200,64,58,.06); }
+  .stamp small{ font-size:9px; font-weight:500; letter-spacing:1px; margin-top:2px; }
+  .day-head-text{ flex:1; min-width:0; }
+  .day-name{ font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:15px; line-height:1.35; }
+  .day-date{ font-size:12px; color:var(--blue); margin-top:2px; }
+  .chevron{ flex:none; width:22px; height:22px; color:var(--blue); transition:transform .3s ease; }
+  .day-card.open .chevron{ transform:rotate(180deg); }
+
+  .day-body-wrap{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+  .day-card.open .day-body-wrap{ grid-template-rows:1fr; }
+  .day-body-inner{ overflow:hidden; }
+
+  .hotel-chip{ margin:0 16px 10px; background:rgba(255,255,255,.8); border:1px dashed var(--blue); border-radius:12px; padding:9px 11px;
+    font-size:12.5px; color:var(--blue-deep); display:flex; gap:8px; align-items:center; line-height:1.4; text-decoration:none; }
+  .hotel-chip:active{ transform:scale(.98); }
+  .hotel-chip .hc-main{ flex:1; min-width:0; }
+  .hotel-chip .hc-note{ display:block; font-size:11px; color:var(--ink-soft); margin-top:1px; }
+  .hotel-chip .hc-map{ flex:none; background:rgb(40 72 119 / 74%); color:#fff; font-size:11px; font-weight:700; padding:5px 10px; border-radius:999px; white-space:nowrap; }
+
+  .day-list{ list-style:none; margin:0; padding:0 16px 16px; display:flex; flex-direction:column; gap:9px; }
+  .day-list li{ display:flex; align-items:flex-start; gap:10px; background:rgba(255,255,255,.7); border-radius:var(--r-sm); padding:10px 12px; font-size:13.5px; line-height:1.5; }
+  .day-card.tone-a .day-list li{ background:var(--blue-soft); }
+  .item-emoji{ font-size:16px; flex:none; margin-top:1px; }
+
+  /* 指南 */
+  .g-card{ background:var(--paper); border-radius:var(--r-md); padding:16px 16px 8px; margin-bottom:14px; box-shadow:var(--shadow); border:1px solid rgba(47,79,143,0.10); }
+  .g-card h3{ font-family:'Zen Maru Gothic',sans-serif; font-size:14.5px; margin:0 0 10px; color:var(--blue-deep); display:flex; align-items:center; gap:7px; }
+  .g-card ul{ list-style:none; margin:0 0 10px; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .g-card li{ font-size:13px; line-height:1.55; padding:9px 11px; background:var(--blue-soft); border-radius:12px; }
+  .g-card.red li{ background:var(--red-soft); }
+  .flight{ display:flex; align-items:center; gap:10px; }
+  .flight .big{ font-family:'Zen Maru Gothic',sans-serif; font-weight:900; font-size:17px; color:var(--blue-deep); }
+  .flight .mid{ flex:1; text-align:center; color:var(--red); font-size:12px; }
+  .flight .mid b{ display:block; font-size:11px; color:var(--ink-soft); font-weight:500; }
+  .hotel-card{ background:var(--paper); border-radius:var(--r-md); padding:14px 16px; margin-bottom:12px; box-shadow:var(--shadow); border:1px solid rgba(47,79,143,0.10); border-left:6px solid var(--red); }
+  .hotel-card.b{ border-left-color:var(--blue); }
+  .hotel-card .h-dates{ font-size:11.5px; color:var(--red); font-weight:700; letter-spacing:.5px; }
+  .hotel-card .h-name{ font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:15px; margin:3px 0 2px; }
+  .hotel-card .h-en{ font-size:12px; color:var(--ink-soft); }
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 8px; }
+  .tag{ font-size:11px; background:var(--blue-soft); color:var(--blue-deep); padding:3px 9px; border-radius:999px; }
+  .tag.r{ background:var(--red-soft); color:var(--red-deep); }
+  .price-row{ display:flex; justify-content:space-between; align-items:baseline; font-size:12.5px; margin-top:6px; }
+  .price-row b{ font-family:'Zen Maru Gothic',sans-serif; font-size:16px; color:var(--blue-deep); }
+  .h-link{ display:inline-block; margin-top:8px; margin-right:14px; font-size:12px; color:var(--blue); font-weight:700; text-decoration:none; border-bottom:1.5px solid var(--blue); }
+  .total-card{ background:linear-gradient(160deg,var(--red),var(--red-deep)); color:#fff; border-radius:var(--r-md); padding:16px; box-shadow:var(--shadow); }
+  .total-card .t1{ font-size:12px; opacity:.9; }
+  .total-card .t2{ font-family:'Zen Maru Gothic',sans-serif; font-weight:900; font-size:24px; margin:4px 0; }
+  .total-card .t3{ font-size:12px; opacity:.92; line-height:1.6; }
+
+  /* 天氣 */
+  .w-note{ background:var(--red-soft); border-radius:var(--r-md); padding:14px 16px; font-size:12.5px; line-height:1.6; color:var(--red-deep); margin-bottom:16px; }
+  .w-card{ display:flex; align-items:center; gap:12px; background:var(--paper); border-radius:var(--r-md); padding:12px 14px; margin-bottom:10px; box-shadow:var(--shadow); border:1px solid rgba(47,79,143,0.10); }
+  .w-icon{ font-size:26px; width:34px; text-align:center; flex:none; }
+  .w-day{ flex:1; }
+  .w-day .d{ font-weight:700; font-size:13.5px; }
+  .w-day .r{ font-size:11.5px; color:var(--ink-soft); margin-top:1px; line-height:1.4; }
+  .w-temp{ font-weight:700; font-size:14px; color:var(--blue); text-align:right; }
+  .w-rain{ font-size:11px; color:var(--red); text-align:right; margin-top:1px; }
+
+  /* 底部浮動導覽 */
+  nav.bottom-nav{ position:fixed; left:50%; bottom:18px; transform:translateX(-50%); width:calc(100% - 40px); max-width:400px;
+    background:rgba(255,255,255,.88); backdrop-filter:blur(14px); border:1px solid rgba(47,79,143,.18); border-radius:999px;
+    display:flex; padding:6px; box-shadow:0 14px 34px -10px rgba(31,53,102,.4); z-index:10; }
+  .nav-btn{ flex:1; border:none; background:transparent; padding:10px 6px; border-radius:999px; display:flex; flex-direction:column; align-items:center; gap:2px;
+    font-family:inherit; font-size:11.5px; color:var(--ink-soft); cursor:pointer; transition:all .25s ease; }
+  .nav-btn .ic{ font-size:19px; transition:transform .25s ease; }
+  .nav-btn.active{ background:var(--blue); color:#fff; font-weight:700; box-shadow:0 6px 14px -4px rgba(47,79,143,.6); }
+  .nav-btn.active .ic{ transform:translateY(-1px) scale(1.08); }
+  .nav-btn:active .ic{ transform:scale(.9); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="top">
+    <div class="top-eyebrow">TRIP PASSPORT · USA WEST COAST</div>
+    <div class="top-title">🇺🇸 美國高級精品奢華小團</div>
+    <div class="top-sub">📅 2026.12.17（四）— 12.28（一）· LA／拉斯維加斯／舊金山</div>
+    <div class="top-badges">
+      <span class="top-badge">✈️ 台北 ⇄ 洛杉磯</span>
+      <span class="top-badge">🎢 環球影城</span>
+      <span class="top-badge">🏀 NBA</span>
+    </div>
+    <div class="stripe"></div>
+  </header>
+
+  <main>
+
+    <!-- 行程 -->
+    <section id="itinerary" class="tab-content active">
+      <div class="section-title">🗓️ 每日行程</div>
+      <div id="daysContainer"></div>
+    </section>
+
+    <!-- 指南 -->
+    <section id="guide" class="tab-content">
+      <div class="section-title">✈️ 航班</div>
+
+      <div class="g-card">
+        <h3>去程｜12/17（四）</h3>
+        <div class="flight" style="margin-bottom:10px">
+          <div><div class="big">23:40</div><div style="font-size:12px;color:var(--ink-soft)">台灣</div></div>
+          <div class="mid">✈️<b>跨日線，當地同日抵達</b></div>
+          <div style="text-align:right"><div class="big">19:05</div><div style="font-size:12px;color:var(--ink-soft)">洛杉磯</div></div>
+        </div>
+      </div>
+
+      <div class="g-card red">
+        <h3>境內段</h3>
+        <ul>
+          <li>12/20（日）11:59 → 13:15　洛杉磯 ➜ 拉斯維加斯</li>
+          <li>12/22（二）11:53 → 13:39　拉斯維加斯 ➜ 舊金山</li>
+          <li>12/23（三）18:23 → 19:56　舊金山 ➜ 洛杉磯</li>
+        </ul>
+      </div>
+
+      <div class="g-card">
+        <h3>回程｜12/26（六）</h3>
+        <div class="flight" style="margin-bottom:10px">
+          <div><div class="big">22:50</div><div style="font-size:12px;color:var(--ink-soft)">洛杉磯</div></div>
+          <div class="mid">✈️<b>12/28（一）抵台</b></div>
+          <div style="text-align:right"><div class="big">05:30</div><div style="font-size:12px;color:var(--ink-soft)">台灣</div></div>
+        </div>
+      </div>
+
+      <div class="sub-title">🏨 住宿一覽</div>
+
+      <div class="hotel-card">
+        <div class="h-dates">12/17 – 12/20 ・ 3 晚</div>
+        <div class="h-name">洛伊斯好萊塢飯店</div>
+        <div class="h-en">Loews Hollywood Hotel</div>
+        <div class="tags"><span class="tag">Trip.com</span><span class="tag">2 大床</span><span class="tag r">無早餐</span><span class="tag">11:00 退房</span></div>
+        <div class="price-row"><span>飯店現場另付約</span><span>NT$ 3,000</span></div>
+        <a class="h-link" href="https://reurl.cc/qaekZN" target="_blank" rel="noopener">訂房連結 →</a>
+        <a class="h-link" href="https://www.google.com/maps/search/?api=1&query=Loews+Hollywood+Hotel+Los+Angeles" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+
+      <div class="hotel-card b">
+        <div class="h-dates">12/20 – 12/22 ・ 2 晚</div>
+        <div class="h-name">拉斯維加斯芳登白露飯店</div>
+        <div class="h-en">Fontainebleau Las Vegas</div>
+        <div class="tags"><span class="tag">Agoda</span><span class="tag">2 大床</span><span class="tag r">有餐飲抵用券</span><span class="tag">15:00 入住</span><span class="tag">11:00 退房</span></div>
+        <div class="price-row"><span>飯店現場另付約</span><span>NT$ 4,000</span></div>
+        <div class="price-row"><span>押金（退房後退還）</span><span>NT$ 9,600</span></div>
+        <a class="h-link" href="https://reurl.cc/mz1lQ1" target="_blank" rel="noopener">訂房連結 →</a>
+        <a class="h-link" href="https://www.google.com/maps/search/?api=1&query=Fontainebleau+Las+Vegas" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+
+      <div class="hotel-card">
+        <div class="h-dates">12/22 – 12/23 ・ 1 晚</div>
+        <div class="h-name">凱悅嘉軒－舊金山市中心</div>
+        <div class="h-en">Hyatt Place San Francisco Downtown</div>
+        <div class="tags"><span class="tag">Agoda</span><span class="tag">2 大床</span><span class="tag r">含早餐</span><span class="tag">15:00 入住</span><span class="tag">11:00 退房</span></div>
+        <div class="price-row"><span>押金（退房後退還）</span><span>NT$ 3,200</span></div>
+        <a class="h-link" href="https://reurl.cc/3yVxmL" target="_blank" rel="noopener">訂房連結 →</a>
+        <a class="h-link" href="https://www.google.com/maps/search/?api=1&query=Hyatt+Place+San+Francisco+Downtown" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+
+      <div class="hotel-card b">
+        <div class="h-dates">12/23 – 12/26 ・ 3 晚</div>
+        <div class="h-name">最佳西方日落廣場飯店</div>
+        <div class="h-en">Best Western Sunset Plaza Hotel</div>
+        <div class="tags"><span class="tag">Trip.com</span><span class="tag">2 大床</span><span class="tag r">含早餐</span><span class="tag">15:00 入住</span><span class="tag">11:00 退房</span></div>
+
+        <a class="h-link" href="https://reurl.cc/7Yxq2l" target="_blank" rel="noopener">訂房連結 →</a>
+        <a class="h-link" href="https://www.google.com/maps/search/?api=1&query=Best+Western+Plus+Sunset+Plaza+Hotel+West+Hollywood" target="_blank" rel="noopener">📍 Google Map</a>
+      </div>
+
+
+      <div class="sub-title">🧳 行前小提醒</div>
+      <div class="g-card">
+        <h3>🛂 證件與入境</h3>
+        <ul>
+          <li>確認護照效期與美國 ESTA／簽證狀態，並備好回程機票資訊。</li>
+          <li>境內線要注意各航空的行李規定，4段航班皆只能託運1件23KG行李。</li>
+        </ul>
+      </div>
+      <div class="g-card red">
+        <h3>🚇 交通</h3>
+        <ul>
+          <li>LA 市區可用 Uber／Lyft；舊金山 12/23 可搭 Muni 前往漁人碼頭與金門大橋。</li>
+          <li>大峽谷半日遊 9:30 出發，前一晚請預留集合地點與時間。</li>
+        </ul>
+      </div>
+      <div class="g-card">
+        <h3>🔌 其他</h3>
+        <ul>
+          <li>美國電壓 110V、插座為 A／B 型，台灣電器多可直接使用。</li>
+          <li>餐廳通常需另付小費，約 15–20%。</li>
+          <li>12/22 NBA 19:30 開打，建議提早入場並留意票券與隨身物品規定。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 天氣 -->
+    <section id="weather" class="tab-content">
+      <div class="section-title">☁️ 天氣參考</div>
+      <div class="w-note">以下為 12 月各地「氣候參考值」，並非即時預報，出發前請再查詢最新預報。洛杉磯日夜溫差大、拉斯維加斯與大峽谷偏冷，記得帶可穿脫的外套。</div>
+
+      <div class="w-card"><div class="w-icon">🌴</div>
+        <div class="w-day"><div class="d">洛杉磯｜12/17–20、12/23–26</div><div class="r">多為晴朗乾燥，早晚偏涼，偶有雨</div></div>
+        <div><div class="w-temp">9–20°C</div><div class="w-rain">降雨機率 低～中</div></div></div>
+      <div class="w-card"><div class="w-icon">🎰</div>
+        <div class="w-day"><div class="d">拉斯維加斯｜12/20–22</div><div class="r">乾冷，白天晴、夜晚明顯降溫，看秀逛 Strip 需保暖</div></div>
+        <div><div class="w-temp">3–14°C</div><div class="w-rain">降雨機率 低</div></div></div>
+      <div class="w-card"><div class="w-icon">🏜️</div>
+        <div class="w-day"><div class="d">大峽谷｜12/21</div><div class="r">海拔高，比拉斯維加斯更冷，可能有霜或積雪</div></div>
+        <div><div class="w-temp">-5–7°C</div><div class="w-rain">視地點而異</div></div></div>
+      <div class="w-card"><div class="w-icon">🌉</div>
+        <div class="w-day"><div class="d">舊金山｜12/22–23</div><div class="r">涼爽多雲，海邊風大，金門大橋特別冷</div></div>
+        <div><div class="w-temp">8–14°C</div><div class="w-rain">降雨機率 中</div></div></div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" onclick="switchTab('itinerary', this)"><span class="ic">🗓️</span>行程</button>
+    <button class="nav-btn" onclick="switchTab('guide', this)"><span class="ic">📖</span>指南</button>
+    <button class="nav-btn" onclick="switchTab('weather', this)"><span class="ic">☁️</span>天氣</button>
+  </nav>
+</div>
+
+<script>
+  function mapUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+
+  var H1 = { name:'洛伊斯好萊塢飯店 Loews Hollywood', q:'Loews Hollywood Hotel Los Angeles' };
+  var H2 = { name:'拉斯維加斯芳登白露飯店 Fontainebleau', q:'Fontainebleau Las Vegas' };
+  var H3 = { name:'凱悅嘉軒 舊金山市中心 Hyatt Place', q:'Hyatt Place San Francisco Downtown' };
+  var H4 = { name:'日落廣場飯店 Sunset Plaza Hotel', q:'Best Western Plus Sunset Plaza Hotel West Hollywood' };
+  function withNote(h, note){ return { name:h.name, q:h.q, note:note }; }
+
+  var DAYS = [
+    { weekday:'THU', date:'12/17（四）', title:'抵達洛杉磯・調時差', tone:'a', hotels:[H1], items:[
+      { emoji:'✈️', text:'19:05 抵達洛杉磯' },
+      { emoji:'🚌', text:'搭機場接駁前往飯店' },
+      { emoji:'🛏️', text:'入住飯店，好好休息調時差' }
+    ]},
+    { weekday:'FRI', date:'12/18（五）', title:'好萊塢＋市中心', tone:'b', hotels:[H1], items:[
+      { emoji:'⭐', text:'好萊塢星光大道' },
+      { emoji:'🎬', text:'杜比劇院' },
+      { emoji:'🏛️', text:'中國戲院（TCL Chinese Theatre）' },
+      { emoji:'🍽️', text:'中央市場 Grand Central Market（午餐）' },
+      { emoji:'🚋', text:'天使鐵路 Angels Flight' },
+      { emoji:'🎼', text:'華特迪士尼音樂廳（外觀）' }
+    ]},
+    { weekday:'SAT', date:'12/19（六）', title:'環球影城日', tone:'c', hotels:[H1], items:[
+      { emoji:'🎢', text:'環球影城 Universal Studios Hollywood（全天）' }
+    ]},
+    { weekday:'SUN', date:'12/20（日）', title:'飛拉斯維加斯・Strip 夜', tone:'a', hotels:[withNote(H2,'15:00 入住')], items:[
+      { emoji:'🧳', text:'08:30 洛伊斯飯店退房，前往機場' },
+      { emoji:'✈️', text:'洛杉磯機場 11:59 起飛 → 13:15 抵達拉斯維加斯' },
+      { emoji:'🎰', text:'逛 Strip' },
+      { emoji:'⛲', text:'Bellagio 水舞' },
+      { emoji:'🎭', text:'看秀' },
+      { emoji:'🔮', text:'Sphere' }
+    ]},
+    { weekday:'MON', date:'12/21（一）', title:'大峽谷半日遊＋賭場夜', tone:'b', hotels:[H2], items:[
+      { emoji:'🏜️', text:'跟團大峽谷半日遊（9:30 – 20:00）' },
+      { emoji:'🎲', text:'晚上逛拉斯維加斯（賭場）' }
+    ]},
+    { weekday:'TUE', date:'12/22（二）', title:'飛舊金山＋NBA', tone:'c', hotels:[withNote(H3,'15:00 入住')], items:[
+      { emoji:'🧳', text:'09:00 芳登白露飯店退房，前往機場' },
+      { emoji:'✈️', text:'LAX 11:53 起飛 → 13:39 抵達舊金山' },
+      { emoji:'🏨', text:'入住 Hyatt Place' },
+      { emoji:'🏀', text:'19:30 NBA 比賽' }
+    ]},
+    { weekday:'WED', date:'12/23（三）', title:'舊金山一日遊 → 回 LA', tone:'a',  hotels:[withNote(H4,'晚上入住')], items:[
+      { emoji:'🧳', text:'凱悅嘉軒退房（11:00 前），寄放行李' },
+      { emoji:'🍽️', text:'吃飯店早餐' },
+      { emoji:'🚃', text:'搭 Muni 前往景點' },
+      { emoji:'🌇', text:'漁人碼頭' },
+      { emoji:'🌉', text:'金門大橋' },
+      { emoji:'🎒', text:'回飯店拿行李，15:15前往機場' },
+      { emoji:'✈️', text:'舊金山 18:23 起飛 → 19:56 抵達洛杉磯' }
+    ]},
+    { weekday:'THU', date:'12/24（四）', title:'農夫市集＋海邊', tone:'b', hotels:[H4], items:[
+      { emoji:'🍽️', text:'吃飯店早餐' },
+      { emoji:'🥕', text:'農夫市集' },
+      { emoji:'👕', text:'STUSSY' },
+      { emoji:'🎡', text:'聖塔莫尼卡' }
+    ]},
+    { weekday:'FRI', date:'12/25（五）', title:'The Grove＋比佛利山莊', tone:'c', hotels:[H4], items:[
+      { emoji:'🍽️', text:'吃飯店早餐' },
+      { emoji:'🛍️', text:'The Grove' },
+      { emoji:'🌴', text:'比佛利山莊' },
+      { emoji:'🏖️', text:'威尼斯海灘' }
+    ]},
+    { weekday:'SAT', date:'12/26（六）', title:'Outlet＋回程', tone:'a', hotels:[withNote(H4,'10:30 退房')], items:[
+      { emoji:'🍽️', text:'吃飯店早餐' },
+      { emoji:'🧳', text:'10:30 飯店退房' },
+      { emoji:'🛍️', text:'Citadel Outlet (可寄放行李)' },
+      { emoji:'🎒', text:'16:30 領行李' },
+      { emoji:'🚕', text:'17:00 前往機場' },
+      { emoji:'✈️', text:'22:50 起飛回台（12/28 05:30 抵達）' }
+    ]}
+  ];
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(){
+    var html = DAYS.map(function(day, i){
+      var chips = day.hotels.map(function(h){
+        return '<a class="hotel-chip" href="' + mapUrl(h.q) + '" target="_blank" rel="noopener">' +
+          '<span>🏨</span>' +
+          '<span class="hc-main">' + esc(h.name) + (h.note ? '<span class="hc-note">' + esc(h.note) + '</span>' : '') + '</span>' +
+          '<span class="hc-map">📍 地圖</span></a>';
+      }).join('');
+      var items = day.items.map(function(it){
+        return '<li><span class="item-emoji">' + it.emoji + '</span><span>' + esc(it.text) + '</span></li>';
+      }).join('');
+      return '<div class="day-card tone-' + day.tone + (i === 0 ? ' open' : '') + '">' +
+        '<div class="day-head">' +
+          '<div class="stamp">D' + (i+1) + '<small>' + day.weekday + '</small></div>' +
+          '<div class="day-head-text"><div class="day-name">' + esc(day.title) + '</div><div class="day-date">' + esc(day.date) + '</div></div>' +
+          '<svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '</div>' +
+        '<div class="day-body-wrap"><div class="day-body-inner">' + chips + '<ul class="day-list">' + items + '</ul></div></div>' +
+      '</div>';
+    }).join('');
+    var c = document.getElementById('daysContainer');
+    c.innerHTML = html;
+    c.querySelectorAll('.day-head').forEach(function(head){
+      head.addEventListener('click', function(){
+        var card = head.parentElement;
+        var was = card.classList.contains('open');
+        c.querySelectorAll('.day-card').forEach(function(x){ x.classList.remove('open'); });
+        if(!was) card.classList.add('open');
+      });
+    });
+  }
+
+  function switchTab(id, btn){
+    document.querySelectorAll('.tab-content').forEach(function(el){ el.classList.toggle('active', el.id === id); });
+    document.querySelectorAll('.nav-btn').forEach(function(el){ el.classList.toggle('active', el === btn); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  render();
+</script>
+</body>
+</html>
